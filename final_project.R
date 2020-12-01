@@ -239,10 +239,11 @@ plot5 = ggplot(train, aes(Total_Population, residuals(model2))) + geom_point() +
 grid.arrange(plot1, plot2, plot3, plot4, plot5)
 
 # Adding a square term to check for non-linearity
-model3 = lm(formula = sum_cumulative_positive ~ sum_new_positives+sum_tests+sum_cumulative_tests
-  +`TotalHouseholdswithIncome-$75,000_to_$99,999`+Total_Population+
-    I(sum_new_positives^2)+I(sum_tests^2)+I(sum_cumulative_tests^2)
-  +I(`TotalHouseholdswithIncome-$75,000_to_$99,999`^2)+I(Total_Population^2), data=train)
+model3 = lm(formula = sum_cumulative_positive ~ sum_new_positives+sum_tests
+            +sum_cumulative_tests+`TotalHouseholdswithIncome-$75,000_to_$99,999`+
+              Total_Population+I(sum_new_positives^2)+I(sum_tests^2)+
+              I(sum_cumulative_tests^2)+I(`TotalHouseholdswithIncome-$75,000_to_$99,999`^2)
+            +I(Total_Population^2), data=train)
 summary(model3)
 par(mfrow=c(2,2))
 plot(model3)
